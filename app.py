@@ -1,5 +1,5 @@
 from bottle import route, run, request, template, static_file, get
-
+from model.enums.redirecionamento_enum import RedirecionamentoEnum,get_route_path
 
 
 class Aplication:
@@ -7,27 +7,27 @@ class Aplication:
 	@staticmethod
 	@get('/<filename:re:.*\.css>')
 	def stylesheets(filename):
-		return static_file(filename, root='static/css')
+		return static_file(filename, root=get_route_path(RedirecionamentoEnum.STYLESHEETS))
 
 	@staticmethod
 	@get('/<filename:re:.*\.js>')
 	def javascripts(filename):
-		return static_file(filename, root='static/js')
+		return static_file(filename, root=get_route_path(RedirecionamentoEnum.JAVASCRIPTS))
 
 	@staticmethod
 	@get('/<filename:re:.*\.(jpg|png|gif|ico)>')
 	def images(filename):
-		return static_file(filename, root='static/img')
+		return static_file(filename, root=get_route_path(RedirecionamentoEnum.IMAGES))
 
 	@staticmethod
 	@get('/<filename:re:.*\.(eot|ttf|woff|svg)>')
 	def fonts(filename):
-		return static_file(filename, root='static/fonts')
+		return static_file(filename, root=get_route_path(RedirecionamentoEnum.FONTS))
 
 	@staticmethod
 	@route('/login')  # @get('/login')
 	def login():
-		return template('login')
+		return template(get_route_path(RedirecionamentoEnum.LOGIN))
 
 	@staticmethod
 	def check_login(username, password):
@@ -42,9 +42,9 @@ class Aplication:
 		username = request.forms.get('username')
 		password = request.forms.get('password')
 		if Aplication.check_login(username, password):
-			return template('sucesso_login', username=username)
+			return template(get_route_path(RedirecionamentoEnum.SUCESSO_LOGIN), username=username)
 		else:
-			return template('login_com_falha')
+			return template(get_route_path(RedirecionamentoEnum.SUCESSO_LOGIN))
 
 	@staticmethod
 	def run():
