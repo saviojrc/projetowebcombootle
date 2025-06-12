@@ -1,3 +1,5 @@
+import os
+
 from bottle import route, run
 from bottle import request, template
 from bottle import static_file, get
@@ -26,8 +28,7 @@ class Aplication:
 		return static_file(filename, root='static/fonts')
 
 	@staticmethod
-	@route('/login')
-	@get('/')
+	@route('/')
 	def login():
 		return template('login')
 
@@ -39,7 +40,7 @@ class Aplication:
 		return False
 
 	@staticmethod
-	@route('/login', method='POST')  # @post('/login')
+	@route('/', method='POST')  # @post('/login')
 	def acao_login():
 		username = request.forms.get('username')
 		password = request.forms.get('password')
@@ -57,6 +58,11 @@ class Aplication:
 
 	@staticmethod
 	def run():
-		run(host='localhost', port=8080, debug=True, reloader=True)
+		if os.environ.get('APP_LOCATION') == 'heroku':
+			port = int(os.environ.get('PORT', 5000))
+			run(host='0.0.0', port=port)
+		else:
+			run(host='localhost', port=8080, debug=True, reloader=True)
+
 
 
