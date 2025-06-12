@@ -5,6 +5,7 @@ class RedirecionamentoEnum(Enum):
     LOGIN = "login"
     LOGIN_COM_FALHA = "login_com_falha"
     SUCESSO_LOGIN = "sucesso_login"
+    ERRO_404 = "erro_404"
     STYLESHEETS = "static/css"
     JAVASCRIPTS = "static/js"
     IMAGES = "static/img"

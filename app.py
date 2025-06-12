@@ -1,5 +1,6 @@
-from bottle import route, run, request, template, static_file, get
-from model.enums.redirecionamento_enum import RedirecionamentoEnum,get_route_path
+
+from model.enums.redirecionamento_enum import RedirecionamentoEnum, get_route_path
+from venv.Scripts.bottle import static_file, get, route, template, request, error, run
 
 
 class Aplication:
@@ -44,8 +45,16 @@ class Aplication:
 		if Aplication.check_login(username, password):
 			return template(get_route_path(RedirecionamentoEnum.SUCESSO_LOGIN), username=username)
 		else:
-			return template(get_route_path(RedirecionamentoEnum.SUCESSO_LOGIN))
+			return template(get_route_path(RedirecionamentoEnum.LOGIN_COM_FALHA))
+
+	## Metodo que trata o erro 404
+	@staticmethod
+	@error(404)
+	def erro_404(erro):
+		print(str(erro))
+		return template(get_route_path(RedirecionamentoEnum.ERRO_404))
 
 	@staticmethod
 	def run():
 		run(host='localhost', port=8080, debug=True, reloader=True)
+
