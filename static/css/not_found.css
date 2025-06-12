@@ -1,0 +1,19 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: url('/static/img/404-not-found.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    font-size: 1.5rem;
+    color: #333;
+}
