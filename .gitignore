@@ -1,6 +1,7 @@
-.idea/
+.idea/*
 __pytest__/
 */.idea
 */__pytest__/
 ## Ignora todos os arquivo e pastas de .idea
 *\.idea
+.idea
